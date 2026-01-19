@@ -1,63 +1,79 @@
 {
- "name": "inc-mngt",
- "version": "1.0.0",
- "description": "A simple CAP project.",
- "dependencies": {
-  "@cap-js/hana": "^2",
-  "@sap/cds": "^9",
-  "express": "^4",
-  "@sap/xssec": "^4"
- },
- "devDependencies": {
-  "@cap-js/sqlite": "^2",
-  "@sap/cds-dk": "^9",
-  "cds-plugin-ui5": "^0.13.0",
-  "rimraf": "^5.0.5",
-  "mbt": "^1.2.29"
- },
- "scripts": {
-  "start": "cds-serve",
-  "watch-incimngt_ui": "cds watch --open incimngtui/index.html?sap-ui-xx-viewCache=false --livereload false",
-  "undeploy": "cf undeploy inc-mngt --delete-services --delete-service-keys --delete-service-brokers",
-  "build": "rimraf resources mta_archives && mbt build --mtar archive",
-  "deploy": "cf deploy mta_archives/archive.mtar --retries 1"
- },
- "private": true,
- "workspaces": [
-  "app/*"
- ],
- "sapux": [
-  "app/incimngt_ui"
- ],
- "cds": {
-  "requires": {
-   "[production]": {
-    "db": "hana",
-    "auth": "xsuaa"
-   },
-   "[development]": {
-    "auth": {
-     "kind": "mocked",
-     "users": {
-      "incident.support@tester.sap.com": {
-       "password": "initial",
-       "roles": [
-        "support"
-       ]
+  "name": "inc-mngt",
+  "version": "1.0.0",
+  "description": "A simple CAP project.",
+  "dependencies": {
+    "@cap-js/hana": "^2",
+    "@sap/cds": "^9",
+    "express": "^4",
+    "@sap/xssec": "^4",
+    "@sap-cloud-sdk/connectivity": "^4",
+    "@sap-cloud-sdk/http-client": "^4",
+    "@sap-cloud-sdk/resilience": "^4"
+  },
+  "devDependencies": {
+    "@cap-js/sqlite": "^2",
+    "@sap/cds-dk": "^9",
+    "cds-plugin-ui5": "^0.13.0",
+    "rimraf": "^5.0.5",
+    "mbt": "^1.2.29"
+  },
+  "scripts": {
+    "start": "cds-serve",
+    "watch-incimngt_ui": "cds watch --open incimngtui/index.html?sap-ui-xx-viewCache=false --livereload false",
+    "undeploy": "cf undeploy inc-mngt --delete-services --delete-service-keys --delete-service-brokers",
+    "build": "rimraf resources mta_archives && mbt build --mtar archive",
+    "deploy": "cf deploy mta_archives/archive.mtar --retries 1"
+  },
+  "private": true,
+  "workspaces": [
+    "app/*"
+  ],
+  "sapux": [
+    "app/incimngt_ui"
+  ],
+  "cds": {
+    "requires": {
+      "[production]": {
+        "db": "hana",
+        "auth": "xsuaa"
       },
-      "alice": {
-       "roles": [
-        "support"
-       ]
+      "[development]": {
+        "auth": {
+          "kind": "mocked",
+          "users": {
+            "incident.support@tester.sap.com": {
+              "password": "initial",
+              "roles": [
+                "support"
+              ]
+            },
+            "alice": {
+              "roles": [
+                "support"
+              ]
+            },
+            "bob": {
+              "roles": [
+                "support"
+              ]
+            }
+          }
+        }
       },
-      "bob": {
-       "roles": [
-        "support"
-       ]
+      "API_BUSINESS_PARTNER": {
+       "kind": "odata-v2",
+        "model": "srv/external/API_BUSINESS_PARTNER",
+        "credentials": {
+          "url": "https://sandbox.api.sap.com/s4hanacloud/sap/opu/odata/sap/API_BUSINESS_PARTNER/",
+          "headers": {
+            "APIKey": "GLUO7j9Q3OMACoWHpYEjeATYVAWYkRaq"
+          }
+        },
+        "csrf": true,
+        "csrfInBatch": true
+        
       }
-     }
     }
-   }
   }
- }
 }
