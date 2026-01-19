@@ -23,3 +23,15 @@ File or Folder | Purpose
 ## Learn More
 
 Learn more at https://cap.cloud.sap/docs/get-started/.
+
+
+https://github.com/SAP-samples/teched2023-XP260/blob/main/exercises/Test%20the%20end%20to%20end%20flow/README.md
+
+https://github.com/SAP-archive/cap-sample-incidents-mgmt/blob/main/db/schema.cds
+https://github.com/cap-js/incidents-app/blob/main/srv/processor-service.js
+
+https://github.com/SAP-archive/cap-sample-incidents-mgmt/blob/main/srv/processors-service.cds
+
+https://github.com/cap-js/sdm
+
+https://github.com/SAP-samples/fiori-elements-incident-management/blob/main/app/test-resources/ext/controller/ProcessFlow.controller.js
